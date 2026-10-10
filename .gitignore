@@ -1,0 +1,28 @@
+# Entornos virtuales y caché de Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+
+# Archivos de entorno y credenciales
+.env
+
+# Configuración de editores e IDEs
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Archivos temporales de sistema operativo (Windows / Linux / macOS)
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+
+# Logs y metadatos de Spark / Hadoop
+*.log
+metastore_db/
+derby.log
