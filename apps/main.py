@@ -1,6 +1,10 @@
 import time
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col, sum, avg, count
+from pyspark.sql.functions import col, sum, avg, count, round
+
+print("\n--------------------------------")
+print("Iniciando pySpark...")
+print("--------------------------------\n")
 
 # 1. Preparar el entorno y cargar datos
 spark = SparkSession.builder \
@@ -28,10 +32,10 @@ df_limpio.printSchema()
 
 # 3. Transformaciones y métricas
 
-# a. Calcular el monto total y promedio de ventas.
+# a. Calcular el monto total y promedio de ventas. (con redondeo a 2 decimales)
 monto_total_y_promedio = df_limpio.agg(
-    sum("Price").alias("Monto_Total"),
-    avg("Price").alias("Promedio")
+    round(sum("Price"), 2).cast("decimal(18, 2)").alias("Monto_Total"),
+    round(avg("Price"), 2).cast("decimal(18, 2)").alias("Promedio")
 )
 monto_total_y_promedio.show()
 
@@ -41,7 +45,7 @@ pedidos_por_estado.show()
 
 # c. Obtener el top 3 de clientes que más dinero gastaron.
 top_clientes = df_limpio.groupBy("customer_id") \
-    .agg(sum("Price").alias("Total_Gastado")) \
+    .agg(round(sum("Price"), 2).cast("decimal(18, 2)").alias("Total_Gastado")) \
     .orderBy(col("Total_Gastado").desc()) \
     .limit(3)
 top_clientes.show()

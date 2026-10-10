@@ -11,6 +11,7 @@ services:
     ports:
       - "8080:8080"   # UI web del nodo Master
       - "7077:7077"   # Puerto de comunicación interna del clúster
+      - "4040:4040"   # UI web de la aplicación (Jobs, Stages, SQL, DAGs)
     volumes:
       - ./data:/opt/spark/data
       - ./apps:/opt/spark/apps
