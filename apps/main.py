@@ -1,3 +1,4 @@
+import time
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, sum, avg, count
 
@@ -44,6 +45,10 @@ top_clientes = df_limpio.groupBy("customer_id") \
     .orderBy(col("Total_Gastado").desc()) \
     .limit(3)
 top_clientes.show()
+
+# Pausa para inspeccionar la interfaz web de Spark antes de finalizar
+print("\n[INFO] Pausando por 120 segundos para monitoreo en la Spark UI...")
+time.sleep(120)
 
 # Detenemos el cluster
 spark.stop()
