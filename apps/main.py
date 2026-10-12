@@ -51,8 +51,12 @@ top_clientes = df_limpio.groupBy("customer_id") \
 top_clientes.show()
 
 # Pausa para inspeccionar la interfaz web de Spark antes de finalizar
-print("\n[INFO] Pausando por 120 segundos para monitoreo en la Spark UI...")
+print("\n\n[INFO] Pausa de 120 segundos para monitoreo...\n")
+print("Spark UI: http://localhost:4040")
+print("Cluster UI: http://localhost:8080")
+
 time.sleep(120)
 
 # Detenemos el cluster
 spark.stop()
+print("\n---  Spark detenido  ---\n")
