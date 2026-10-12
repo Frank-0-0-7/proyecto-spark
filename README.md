@@ -11,8 +11,8 @@ docker compose up -d
 ### 2. Ejecutar el script PySpark
 
 ```bash
-docker exec -it spark-master /opt/spark/bin/spark-submit \
-  --master spark://spark-master:7077 \
+docker exec -it nodo-maestro /opt/spark/bin/spark-submit \
+  --master spark://nodo-maestro:7077 \
   /opt/spark/apps/main.py
 ```
 
