@@ -1,9 +1,9 @@
 version: '3.8'
 
 services:
-  spark-master:
+  nodo-maestro:
     image: apache/spark:3.5.1
-    container_name: spark-master
+    container_name: nodo-maestro
     environment:
       - SPARK_MODE=master
       - SPARK_RPC_AUTHENTICATION_ENABLED=no
@@ -17,32 +17,32 @@ services:
       - ./apps:/opt/spark/apps
     command: /opt/spark/bin/spark-class org.apache.spark.deploy.master.Master
 
-  spark-worker-1:
+  nodo-esclavo-1:
     image: apache/spark:3.5.1
-    container_name: spark-worker-1
+    container_name: nodo-esclavo-1
     depends_on:
-      - spark-master
+      - nodo-maestro
     environment:
       - SPARK_MODE=worker
-      - SPARK_MASTER_URL=spark://spark-master:7077
+      - SPARK_MASTER_URL=spark://nodo-maestro:7077
       - SPARK_WORKER_CORES=2
       - SPARK_WORKER_MEMORY=1G
     volumes:
       - ./data:/opt/spark/data
       - ./apps:/opt/spark/apps
-    command: /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://nodo-maestro:7077
 
-  spark-worker-2:
+  nodo-esclavo-2:
     image: apache/spark:3.5.1
-    container_name: spark-worker-2
+    container_name: nodo-esclavo-2
     depends_on:
-      - spark-master
+      - nodo-maestro
     environment:
       - SPARK_MODE=worker
-      - SPARK_MASTER_URL=spark://spark-master:7077
+      - SPARK_MASTER_URL=spark://nodo-maestro:7077
       - SPARK_WORKER_CORES=2
       - SPARK_WORKER_MEMORY=1G
     volumes:
       - ./data:/opt/spark/data
       - ./apps:/opt/spark/apps
-    command: /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://spark-master:7077
+    command: /opt/spark/bin/spark-class org.apache.spark.deploy.worker.Worker spark://nodo-maestro:7077
