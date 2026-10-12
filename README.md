@@ -1,20 +1,14 @@
 # proyecto-spark
 
-## Para la consola:
+## Ejecucion en consola:
 
-### Para limpiar los contenedores
-
-```bash
-docker compose down
-```
-
-### 1. Comando para ejecutar contenedores
+### 1. Iniciar el clúster (Master y Workers)
 
 ```bash
 docker compose up -d
 ```
 
-### 2. Comando para ejecutar el PySpark
+### 2. Ejecutar el script PySpark
 
 ```bash
 docker exec -it spark-master /opt/spark/bin/spark-submit \
@@ -22,15 +16,24 @@ docker exec -it spark-master /opt/spark/bin/spark-submit \
   /opt/spark/apps/main.py
 ```
 
-## Para la web:
+### 3. Detener y limpiar los contenedores
 
-### Para ver la UI web de Spark
+```bash
+docker compose down
+```
+
+---
+
+## Monitoreo y Web UI:
+
+- **Spark Master UI (Estado del clúster y workers):**
 
 ```bash
 http://localhost:8080/
 ```
 
-### Para ver la UI web del job
+- **Spark Application / Job UI (DAG, Stages y Tasks):**
+#### (Solo aparece durante el proceso del PySpark)
 
 ```bash
 http://localhost:4040/
